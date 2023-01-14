@@ -1,0 +1,43 @@
+def IEC60062(resistencia):
+    dicnumero = {'0':'Preta', '1':'Marrom', '2':'Vermelha', '3':'Laranja', '4':'Amarela', '5':'Verde', '6':'Azul', '7':'Violeta', '8':'Cinza', '9':'Branca'}
+    dicmultiplicador = {'m':10**-3, '-':1, 'K':10**3, 'M':10**6, 'G':10**9}
+    dicmultiplicador2 = {0.001:'Rosa', 0.01:'Prata', 0.1:'Dourada', 1:'Preta', 10:'Marrom', 100:'Vermelha', 1000:'Laranja', 10000:'Amarela', 100000:'Verde', 1000000:'Azul', 10000000:'Violeta', 100000000:'Cinza', 1000000000:'Branca'}
+    dictolerancia = {'20':'Nenhuma' ,'10':'Prata', '5':'Dourada', '1':'Marrom', '2':'Vermelha', '0.05':'Laranja', '0.02':'Amarela', '0.5':'Verde', '0.25':'Azul', '0.1':'Violeta', '0.01':'Cinza'}
+    resultado = []
+    resistencia = resistencia.split()
+    numero = resistencia[0]
+    multiplicador = numero[-1]
+    numero = numero[0:-1]
+    tolerancia = resistencia[1]
+    numero2 = ''
+    aux = 0
+    aux2 = multiplicador
+    dourada = 'Dourada'
+    amarelo = 'Amarela'
+    rosa = 'Rosa'
+    for i in numero:
+        if i != '.':
+            numero2 += i
+    for i in numero2:
+        if i in dicnumero.keys():
+            resultado.append(dicnumero[i])
+    for i in numero:
+        if '.' in numero:
+            aux = len(numero) - 2
+    if multiplicador in dicmultiplicador.keys():
+        multiplicador = dicmultiplicador[multiplicador]
+    multiplicador = multiplicador * 10**-aux
+    if multiplicador in dicmultiplicador2.keys():
+        multiplicador = dicmultiplicador2[multiplicador]
+    resultado.append(multiplicador)
+    if numero == '1':
+        if aux2 == '-':
+            resultado.append(dourada)
+        elif aux == 'm':
+            resultado.append(amarelo)
+        elif aux == 'K':
+            resultado.append(rosa)
+    if tolerancia in dictolerancia.keys():
+        tolerancia = dictolerancia[tolerancia]
+    resultado.append(tolerancia)
+    return resultado
