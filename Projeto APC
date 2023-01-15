@@ -18,6 +18,9 @@ def IEC60062(resistencia):
     for i in numero:
         if i != '.':
             numero2 += i
+    if len(numero2) == 1:
+        aux = 1
+        numero2 += '0'
     for i in numero2:
         if i in dicnumero.keys():
             resultado.append(dicnumero[i])
@@ -30,13 +33,6 @@ def IEC60062(resistencia):
     if multiplicador in dicmultiplicador2.keys():
         multiplicador = dicmultiplicador2[multiplicador]
     resultado.append(multiplicador)
-    if numero == '1':
-        if aux2 == '-':
-            resultado.append(dourada)
-        elif aux == 'm':
-            resultado.append(amarelo)
-        elif aux == 'K':
-            resultado.append(rosa)
     if tolerancia in dictolerancia.keys():
         tolerancia = dictolerancia[tolerancia]
     resultado.append(tolerancia)
