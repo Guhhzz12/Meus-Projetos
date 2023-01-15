@@ -10,23 +10,23 @@ def IEC60062(resistencia):
     numero = numero[0:-1]
     tolerancia = resistencia[1]
     numero2 = ''
-    aux = 0
+    aux = -1
     aux2 = multiplicador
-    dourada = 'Dourada'
-    amarelo = 'Amarela'
-    rosa = 'Rosa'
+    definidor = 0   # criei pra poder contar as casas decimais
     for i in numero:
-        if i != '.':
+        if i == '.' or definidor == 1:  # no momento que i for igual ao '.' vai ativar o definidor pra contar as casas decimais
+            aux += 1
+            definidor = 1
+        if i != '.' :
             numero2 += i
+    if '.' not in numero and len(numero2) != 1:
+        aux += 1
     if len(numero2) == 1:
         aux = 1
         numero2 += '0'
     for i in numero2:
         if i in dicnumero.keys():
             resultado.append(dicnumero[i])
-    for i in numero:
-        if '.' in numero:
-            aux = len(numero) - 2
     if multiplicador in dicmultiplicador.keys():
         multiplicador = dicmultiplicador[multiplicador]
     multiplicador = multiplicador * 10**-aux
